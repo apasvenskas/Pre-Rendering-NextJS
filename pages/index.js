@@ -1,34 +1,27 @@
-import { Fragment } from 'react';
-import Head from 'next/head';
-
-import FeaturedPosts from '../components/home-page/featured-posts';
-import Hero from '../components/home-page/hero';
-import { getFeaturedPosts } from '../lib/posts-util';
-
-function HomePage(props) {
-  return (
-    <Fragment>
-      <Head>
-        <title>Max' Blog</title>
-        <meta
-          name='description'
-          content='I post about programming and web development.'
-        />
-      </Head>
-      <Hero />
-      <FeaturedPosts posts={props.posts} />
-    </Fragment>
-  );
+function HomePage(props){
+  const { products } = props; 
+  return(
+    <ul>
+      {/* <li>Product 1</li>
+      <li>Product 2</li>
+      <li>Product 3</li>
+      <li>Product 4</li> */}
+      {/* create a map for the product instead of hard code */}
+      {products.map((products) => {
+        <li key={product.id}>{product.title}</li>
+      })}
+    </ul>
+  )
 }
 
-export function getStaticProps() {
-  const featuredPosts = getFeaturedPosts();
+// for fethcing data 
 
+export async function getStaticProps(){ // data is passed to the rest of the project through props
   return {
     props: {
-      posts: featuredPosts,
-    },
-  };
+      products: [{ id: 'p1', title: 'Product 1' }],
+  },
+}; 
 }
 
 export default HomePage;
