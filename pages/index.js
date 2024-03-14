@@ -13,7 +13,7 @@ function HomePage(props){
       {/* create a map for the product instead of hard code */}
       {products.map((product) => (
         <li key={products.id}>
-          <Link href={`/${product.id}`}>
+          <Link href={`/products/${product.id}`}>
           {product.title}
         </Link>
         </li>
