@@ -2,6 +2,8 @@ import { Fragment } from "react";
 import path from 'path';
 import fs from 'fs/promises'
 
+// dynamic data is not pregenerated
+
 function ProductDetailPage(props) {
 
     const { loadedProduct } = props;
@@ -29,6 +31,19 @@ export async function getStaticProps(context) {
         loadedProduct: product
     }
   }
+}
+
+// for getting rid of the error Error: getStaticPaths is required for dynamic SSG pages and is missing for '/[pid]'.
+// tells the NEx.t to pregenerate the following values. 
+export async function getStaticPaths(){
+    return {
+        paths: [
+            { params: { pid: 'p1' } },
+            { params: { pid: 'p2' } },
+            { params: { pid: 'p3' } },
+        ],
+        fallback: false
+    };
 }
 
 export default ProductDetailPage;
